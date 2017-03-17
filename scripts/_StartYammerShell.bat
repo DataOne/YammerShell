@@ -1,0 +1,1 @@
+start powershell -NoExit -NoLogo -Command "Import-Module '.\YammerShell.dll'; Set-YmToken '1234';
