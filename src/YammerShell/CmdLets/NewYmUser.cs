@@ -104,7 +104,7 @@ namespace YammerShell.CmdLets
                 var url = string.Format("{0}users.json?{1}{2}{3}{4}{5}{6}", Properties.Resources.YammerApi, Email, fullName, jobTitle, departmentName, location, workTelephone);
                 var response = _request.Post(url, string.Empty);
                 var newUser = JObject.Parse(response);
-                WriteObject(Convert.ToInt32(newUser["id"]));
+                WriteObject(Convert.ToInt64(newUser["id"]));
             }
             catch (Exception e)
             {

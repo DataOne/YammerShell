@@ -15,7 +15,7 @@ namespace YammerShell.CmdLets
         Position = 0,
         HelpMessage = "ID of the message to delete"
         )]
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         protected override void ProcessRecord()
         {
