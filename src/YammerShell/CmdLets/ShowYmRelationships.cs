@@ -75,7 +75,7 @@ namespace YammerShell.CmdLets
         {
             var yammerUser = new YammerUser();
             yammerUser.UserName = GetToken(user, "name");
-            yammerUser.Id = Convert.ToInt32(GetToken(user, "id"));
+            yammerUser.Id = Convert.ToInt64(GetToken(user, "id"));
             yammerUser.FirstName = GetToken(user, "first_name");
             yammerUser.LastName = GetToken(user, "last_name");
             yammerUser.FullName = GetToken(user, "full_name");
@@ -83,7 +83,7 @@ namespace YammerShell.CmdLets
             yammerUser.JobTitle = GetToken(user, "job_title");
             yammerUser.Department = GetToken(user, "department");
             yammerUser.Timezone = GetToken(user, "timezone");
-            yammerUser.NetworkId = Convert.ToInt32(GetToken(user, "network_id"));
+            yammerUser.NetworkId = Convert.ToInt64(GetToken(user, "network_id"));
             yammerUser.NetworkName = GetToken(user, "network_name");
             yammerUser.Url = GetToken(user, "web_url");
             var activatedAt = user["activated_at"];

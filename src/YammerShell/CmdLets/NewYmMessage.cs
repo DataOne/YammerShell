@@ -91,7 +91,7 @@ namespace YammerShell.CmdLets
                 var jObject = JObject.Parse(response);
                 var messages = JArray.Parse(jObject["messages"].ToString());
                 var id = messages[0]["id"];
-                WriteObject(Convert.ToInt32(id));
+                WriteObject(Convert.ToInt64(id));
             }
             catch (Exception e)
             {

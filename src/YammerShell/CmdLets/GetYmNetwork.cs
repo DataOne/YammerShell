@@ -17,7 +17,7 @@ namespace YammerShell.CmdLets
         Position = 0,
         HelpMessage = "With this parameter set you request all networks the user has access to but filtered by id."
         )]
-        public int? Id { get; set; }
+        public long? Id { get; set; }
 
         protected override void ProcessRecord()
         {
@@ -36,7 +36,7 @@ namespace YammerShell.CmdLets
                 var yammerNetworks = new List<YammerNetwork>();
                 foreach (var network in JArray.Parse(result))
                 {
-                    var networkId = Convert.ToInt32(network["id"]);
+                    var networkId = Convert.ToInt64(network["id"]);
                     if (!Id.HasValue || Id == networkId)
                     {
                         yammerNetworks.Add(GetYammerNetwork(network, networkId));
@@ -51,7 +51,7 @@ namespace YammerShell.CmdLets
             }
         }
 
-        private YammerNetwork GetYammerNetwork(JToken network, int id)
+        private YammerNetwork GetYammerNetwork(JToken network, long id)
         {
             var yammerNetwork = new YammerNetwork();
             yammerNetwork.Id = id;

@@ -18,7 +18,7 @@ namespace YammerShell.CmdLets
         HelpMessage = "ID of a user",
         ParameterSetName = "Id"
         )]
-        public int? Id { get; set; }
+        public long? Id { get; set; }
 
         [ValidateRange(1,1000)]
         [Parameter(
@@ -174,7 +174,7 @@ namespace YammerShell.CmdLets
             return allYammerUsers;
         }
 
-        public YammerUser GetYammerUser(int id)
+        public YammerUser GetYammerUser(long id)
         {
             var result = _request.Get(string.Format("{0}users/{1}.json", Properties.Resources.YammerApi, id));
             var user = JObject.Parse(result);
@@ -249,7 +249,7 @@ namespace YammerShell.CmdLets
         private YammerUser GetYammerUser(JToken user)
         {
             var yammerUser = new YammerUser();
-            yammerUser.Id = Convert.ToInt32(GetToken(user, "id"));
+            yammerUser.Id = Convert.ToInt64(GetToken(user, "id"));
             yammerUser.UserName = GetToken(user, "name");
             yammerUser.FirstName = GetToken(user, "first_name");
             yammerUser.LastName = GetToken(user, "last_name");
@@ -258,7 +258,7 @@ namespace YammerShell.CmdLets
             yammerUser.JobTitle = GetToken(user, "job_title");
             yammerUser.Department = GetToken(user, "department");
             yammerUser.Timezone = GetToken(user, "timezone");
-            yammerUser.NetworkId = Convert.ToInt32(GetToken(user, "network_id"));
+            yammerUser.NetworkId = Convert.ToInt64(GetToken(user, "network_id"));
             yammerUser.NetworkName = GetToken(user, "network_name");
             yammerUser.Url = GetToken(user, "web_url");
             var activatedAt = user["activated_at"];

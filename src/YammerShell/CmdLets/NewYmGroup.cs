@@ -55,7 +55,7 @@ namespace YammerShell.CmdLets
             {
                 var response = _request.Post(requestUrl, string.Empty);
                 var newGroup = JObject.Parse(response);
-                WriteObject(Convert.ToInt32(newGroup["id"]));
+                WriteObject(Convert.ToInt64(newGroup["id"]));
             }
             catch (Exception e)
             {

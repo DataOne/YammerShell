@@ -48,7 +48,7 @@ namespace YammerShell.CmdLets
         HelpMessage = "Id of a message",
         ParameterSetName = "Id"
         )]
-        public int? Id { get; set; }
+        public string Id { get; set; }
 
         [Parameter(
         ValueFromPipelineByPropertyName = true,
@@ -62,7 +62,7 @@ namespace YammerShell.CmdLets
         ValueFromPipeline = true,
         HelpMessage = "Returns messages older than this message ID"
         )]
-        public int? OlderThan { get; set; }
+        public string OlderThan { get; set; }
 
         [Parameter(
         ValueFromPipelineByPropertyName = true,
@@ -70,7 +70,7 @@ namespace YammerShell.CmdLets
         HelpMessage = "The feed of messages for a hashtag specified by the numeric string ID",
         ParameterSetName = "Topic"
         )]
-        public int? Topic { get; set; }
+        public string Topic { get; set; }
 
         protected override void ProcessRecord()
         {
@@ -82,7 +82,7 @@ namespace YammerShell.CmdLets
             }
             _request = new Request(token.Value.ToString());
 
-            if (Id.HasValue)
+            if (!string.IsNullOrEmpty(Id))
             {
                 try
                 {
@@ -162,7 +162,7 @@ namespace YammerShell.CmdLets
                 }
             }
 
-            if (Topic.HasValue)
+            if (!string.IsNullOrEmpty(Topic))
             {
                 requestUrl = Properties.Resources.YammerApi + "messages/about_topic/" + Topic + ".json";
                 return GetMessagesFromApi(requestUrl, parameters);
@@ -210,13 +210,13 @@ namespace YammerShell.CmdLets
         private YammerMessage GetYammerMessage(JToken message)
         {
             var yammerMessage = new YammerMessage();
-            yammerMessage.Id = Convert.ToInt32(message["id"]);
-            yammerMessage.SenderId = Convert.ToInt32(message["sender_id"]);
-            yammerMessage.RepliedToId = message.Value<int?>("replied_to_id");
+            yammerMessage.Id = message["id"].ToString();
+            yammerMessage.SenderId = message["sender_id"].ToString();
+            yammerMessage.RepliedToId = message.Value<string>("replied_to_id");
             yammerMessage.CreatedAt = (DateTime)message["created_at"];
-            yammerMessage.NetworkId = Convert.ToInt32(message["network_id"]);
+            yammerMessage.NetworkId = message["network_id"].ToString();
             yammerMessage.MessageType = message["message_type"].ToString();
-            yammerMessage.GroupId = message.Value<int?>("group_id");
+            yammerMessage.GroupId = message.Value<string>("group_id");
             yammerMessage.Body = message["body"]["plain"].ToString();
             yammerMessage.Url = message["web_url"].ToString();
 

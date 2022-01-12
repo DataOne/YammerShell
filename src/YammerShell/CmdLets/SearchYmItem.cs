@@ -113,7 +113,7 @@ namespace YammerShell.CmdLets
         private YammerUser GetYammerUser(JToken user)
         {
             var yammerUser = new YammerUser();
-            yammerUser.Id = Convert.ToInt32(GetToken(user, "id"));
+            yammerUser.Id = Convert.ToInt64(GetToken(user, "id"));
             yammerUser.UserName = GetToken(user, "name");
             yammerUser.FirstName = GetToken(user, "first_name");
             yammerUser.LastName = GetToken(user, "last_name");
@@ -122,7 +122,7 @@ namespace YammerShell.CmdLets
             yammerUser.JobTitle = GetToken(user, "job_title");
             yammerUser.Department = GetToken(user, "department");
             yammerUser.Timezone = GetToken(user, "timezone");
-            yammerUser.NetworkId = Convert.ToInt32(GetToken(user, "network_id"));
+            yammerUser.NetworkId = Convert.ToInt64(GetToken(user, "network_id"));
             yammerUser.NetworkName = GetToken(user, "network_name");
             yammerUser.Url = GetToken(user, "web_url");
             var activatedAt = user["activated_at"];
@@ -152,8 +152,8 @@ namespace YammerShell.CmdLets
         {
             var yammerFile = new YammerFile();
 
-            yammerFile.Id = Convert.ToInt32(file["id"]);
-            yammerFile.NetworkId = Convert.ToInt32(file["network_id"]);
+            yammerFile.Id = Convert.ToInt64(file["id"]);
+            yammerFile.NetworkId = Convert.ToInt64(file["network_id"]);
             yammerFile.GroupId = file.Value<int?>("group_id");
             yammerFile.OwnerId = file.Value<int?>("owner_id");
             yammerFile.Url = file["web_url"].ToString();
@@ -169,9 +169,9 @@ namespace YammerShell.CmdLets
         private YammerTopic GetYammerTopic(JToken topic)
         {
             var yammerTopic = new YammerTopic();
-            yammerTopic.Id = Convert.ToInt32(topic["id"]);
+            yammerTopic.Id = Convert.ToInt64(topic["id"]);
             yammerTopic.Name = topic["name"].ToString();
-            yammerTopic.NetworkId = Convert.ToInt32(topic["network_id"]);
+            yammerTopic.NetworkId = Convert.ToInt64(topic["network_id"]);
             yammerTopic.Url = topic["web_url"].ToString();
             return yammerTopic;
         }
@@ -179,16 +179,16 @@ namespace YammerShell.CmdLets
         private YammerGroup GetYammerGroup(JToken group)
         {
             var yammerGroup = new YammerGroup();
-            yammerGroup.Id = Convert.ToInt32(group["id"]);
+            yammerGroup.Id = Convert.ToInt64(group["id"]);
             yammerGroup.Email = group["email"].ToString();
             yammerGroup.FullName = group["full_name"].ToString();
             yammerGroup.Name = group["name"].ToString();
-            yammerGroup.NetworkId = Convert.ToInt32(group["network_id"]);
+            yammerGroup.NetworkId = Convert.ToInt64(group["network_id"]);
             yammerGroup.Description = group["description"].ToString();
             yammerGroup.Privacy = group["privacy"].ToString();
             yammerGroup.Url = group["web_url"].ToString();
             yammerGroup.CreatedAt = (DateTime)group["created_at"];
-            yammerGroup.CreatorId = Convert.ToInt32(group["creator_id"]);
+            yammerGroup.CreatorId = Convert.ToInt64(group["creator_id"]);
             yammerGroup.Members = Convert.ToInt32(group["stats"]["members"]);
             return yammerGroup;
         }
@@ -196,13 +196,13 @@ namespace YammerShell.CmdLets
         private YammerMessage GetYammerMessage(JToken message)
         {
             var yammerMessage = new YammerMessage();
-            yammerMessage.Id = Convert.ToInt32(message["id"]);
-            yammerMessage.SenderId = Convert.ToInt32(message["sender_id"]);
-            yammerMessage.RepliedToId = message.Value<int?>("replied_to_id");
+            yammerMessage.Id = message["id"].ToString();
+            yammerMessage.SenderId = message["sender_id"].ToString();
+            yammerMessage.RepliedToId = message.Value<string>("replied_to_id");
             yammerMessage.CreatedAt = (DateTime)message["created_at"];
-            yammerMessage.NetworkId = Convert.ToInt32(message["network_id"]);
+            yammerMessage.NetworkId = message["network_id"].ToString();
             yammerMessage.MessageType = message["message_type"].ToString();
-            yammerMessage.GroupId = message.Value<int?>("group_id");
+            yammerMessage.GroupId = message.Value<string>("group_id");
             yammerMessage.Body = message["body"]["plain"].ToString();
             yammerMessage.Url = message["web_url"].ToString();
 

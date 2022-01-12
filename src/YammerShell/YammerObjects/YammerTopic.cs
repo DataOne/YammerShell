@@ -2,8 +2,8 @@
 {
     public class YammerTopic
     {
-        public int Id { get; set; }
-        public int NetworkId { get; set; }
+        public long Id { get; set; }
+        public long NetworkId { get; set; }
         public string Name { get; set; }
         public string Url { get; set; }
     }

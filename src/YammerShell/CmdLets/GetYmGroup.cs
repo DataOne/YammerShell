@@ -64,16 +64,16 @@ namespace YammerShell.CmdLets
         private YammerGroup GetYammerGroupFromJToken(JToken group)
         {
             var yammerGroup = new YammerGroup();
-            yammerGroup.Id = Convert.ToInt32(group["id"]);
+            yammerGroup.Id = Convert.ToInt64(group["id"]);
             yammerGroup.Email = (group["email"] ?? string.Empty).ToString();
             yammerGroup.FullName = group["full_name"].ToString();
             yammerGroup.Name = group["name"].ToString();
-            yammerGroup.NetworkId = Convert.ToInt32(group["network_id"]);
+            yammerGroup.NetworkId = Convert.ToInt64(group["network_id"]);
             yammerGroup.Description = (group["description"] ?? string.Empty).ToString();
             yammerGroup.Privacy = group["privacy"].ToString();
             yammerGroup.Url = (group["web_url"] ?? string.Empty).ToString();
             yammerGroup.CreatedAt = (DateTime)(group["created_at"] ?? DateTime.MinValue);
-            yammerGroup.CreatorId = Convert.ToInt32(group["creator_id"] ?? -1);
+            yammerGroup.CreatorId = Convert.ToInt64(group["creator_id"] ?? -1);
             yammerGroup.Members = Convert.ToInt32(group["stats"]["members"]); 
             return yammerGroup;
         }
